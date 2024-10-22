@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Logo from './assets/logo.png';
+import Logo from '../app/assets/logo.png';
 import Image from 'next/image';
 import { FaRegCompass, FaRegFolderOpen, FaUsers } from "react-icons/fa";
 import { IoSettingsOutline } from 'react-icons/io5';
