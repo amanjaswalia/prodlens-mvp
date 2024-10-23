@@ -102,7 +102,7 @@ const AllDossiers: React.FC = () => {
       </div>
 
       <div className="py-4">
-        <h2 className="text-xl font-semibold mb-4 text-[#051F61]">
+        <h2 className="text-xl font-semibold mb-6 text-[#051F61]">
           My Dossiers
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -151,7 +151,7 @@ const AllDossiers: React.FC = () => {
         </div>
 
         <div>
-          <h2 className="text-xl font-semibold mt-8 mb-4 text-[#051F61]">
+          <h2 className="text-xl font-semibold mt-8 mb-6 text-[#051F61]">
             For Review
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
