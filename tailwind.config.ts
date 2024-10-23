@@ -13,6 +13,9 @@ const config: Config = {
         foreground: "var(--foreground)",
         'custom-text': '#4B4B4B'
       },
+      boxShadow: {
+        'custom-full': '0 4px 10px rgba(0, 0, 0, 0.25)',
+      },
     },
   },
   plugins: [],

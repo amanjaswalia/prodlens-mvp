@@ -4,6 +4,7 @@ import Title from './Title';
 import MenuBar from './MenuBar';
 import Card from './Card';
 import cardsData from '../app/cardsData'
+import Link from 'next/link';
 
 const HomePage: React.FC = () => {
   const today = new Date().toLocaleDateString('en-US', {
@@ -13,9 +14,9 @@ const HomePage: React.FC = () => {
     day: 'numeric',
   });
   return (
-    <div>
+    <div  className='bg-background p-6'>
       <SearchBar />
-      <div className='py-4'>
+      <div className='pt-4'>
       <Title content="Welcome Gabe" date={today} />
       <MenuBar />
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
@@ -25,10 +26,13 @@ const HomePage: React.FC = () => {
           title={card.title}
           timeline={card.timeline}
           status={card.status}
+          message={card.message}
         />
       ))}
       </div>
       </div>
+      <Link href="/all-dossiers" className="text-blue-500 hover:underline mt-3 block">All Dossiers
+        </Link>
     </div>
   );
 };
