@@ -14,7 +14,7 @@ const HomePage: React.FC = () => {
     day: 'numeric',
   });
   return (
-    <div  className='bg-background p-6'>
+    <div  className='bg-background p-6 min-h-screen'>
       <SearchBar />
       <div className='pt-4'>
       <Title content="Welcome Gabe" date={today} />

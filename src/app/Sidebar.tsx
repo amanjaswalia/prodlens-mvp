@@ -77,7 +77,7 @@ export default function Sidebar() {
             </Link>
           </li>
         </ul>
-        <div className='absolute bottom-0 left-0 bg-[#F0F0F0] p-4 w-full'>
+        <div className='fixed bottom-0 left-0 bg-[#F0F0F0] p-4 w-64'>
           <h5 className='inline-block text-custom-text text-sm border-b boder-b-[1px] border-dashed border-custom-text'>Free Trial</h5>
           <p className='text-custom-text text-sm'> Expiring Decemper 21st, 2024</p>
         </div>
