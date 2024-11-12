@@ -14,7 +14,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex h-screen">
-      {pathname !== '/all-dossiers' && <Sidebar />}
+      {pathname !== '/all-dossiers' && <Sidebar activeRoute={""} onLogout={function (): void {
+          throw new Error("Function not implemented.");
+        } } />}
       <div className="flex-1">{children}</div>
       </body>
     </html>

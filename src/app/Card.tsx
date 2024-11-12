@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect, useRef } from "react";
 import StatusLabel from "./StatusLabel";
 import { SlOptionsVertical } from "react-icons/sl";
 import { TbMessageDots } from "react-icons/tb";
@@ -21,9 +23,29 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ title, timeline, status, message }) => {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const popupRef = useRef<HTMLDivElement>(null);
   const avatars = [Member1, Member2, Member3];
+  const togglePopup = () => {
+    setIsPopupOpen(!isPopupOpen);
+  };
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        popupRef.current &&
+        !popupRef.current.contains(event.target as Node)
+      ) {
+        setIsPopupOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
-    <div className="bg-white shadow-lg rounded-lg py-4 px-8 w-full">
+    <div className="bg-white shadow-lg rounded-lg py-4 px-8 w-full relative">
       <div className="flex justify-between">
         <StatusLabel
           label={status.label}
@@ -31,9 +53,28 @@ const Card: React.FC<CardProps> = ({ title, timeline, status, message }) => {
           bgColor={status.bgColor}
         />
 
-        <button className="text-gray-500">
+        <button className="text-gray-500 relative" onClick={togglePopup}>
           <SlOptionsVertical />
         </button>
+        {isPopupOpen && (
+          <div
+            ref={popupRef}
+            className="absolute top-10 right-4 bg-gray-400 shadow-custom-full p-4 rounded-lg w-40 z-10"
+          >
+            <button
+              onClick={togglePopup}
+              className="block w-full text-left text-sm text-white hover:bg-gray-100 hover:text-black p-2 rounded"
+            >
+              Option 1
+            </button>
+            <button
+              onClick={togglePopup}
+              className="block w-full text-left text-sm text-white hover:bg-gray-100 hover:text-black p-2 rounded"
+            >
+              Option 2
+            </button>
+          </div>
+        )}
       </div>
 
       <h3 className="text-lg font-semibold mt-4">{title}</h3>
