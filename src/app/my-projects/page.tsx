@@ -11,7 +11,7 @@ const Projects: React.FC = () => {
   <p className="text-sm text-gray-500">70% Complete</p>
 </div>
     </div>
-  )
+  );
 }
 
 export default Projects;
