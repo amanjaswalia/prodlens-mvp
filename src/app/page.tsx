@@ -19,7 +19,7 @@ const HomePage: React.FC = () => {
       <div className="pt-4">
         <Title content="Welcome Gabe" date={today} />
         <MenuBar />
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
           {cardsData.map((card, index) => (
             <Card
               key={index}
@@ -31,12 +31,12 @@ const HomePage: React.FC = () => {
           ))}
         </div>
       </div>
-      <div className="w-32">
+      <div className="mt-6">
         <Link
           href="/all-dossiers"
-          className="text-blue-500 hover:underline mt-3 block"
+          className="text-primary hover:underline font-medium"
         >
-          All Dossiers
+          View All Dossiers →
         </Link>
       </div>
     </div>

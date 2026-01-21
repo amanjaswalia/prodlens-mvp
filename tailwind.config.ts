@@ -6,15 +6,21 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
-        background: "#F0F4F7",
+        background: "var(--background)",
         foreground: "var(--foreground)",
-        'custom-text': '#4B4B4B'
+        "custom-text": "var(--custom-text)",
+        "card-bg": "var(--card-bg)",
+        "sidebar-bg": "var(--sidebar-bg)",
+        "border-color": "var(--border-color)",
+        primary: "#0072BB",
+        "primary-dark": "#005a94",
       },
       boxShadow: {
-        'custom-full': '0 4px 10px rgba(0, 0, 0, 0.25)',
+        "custom-full": "0 4px 10px rgba(0, 0, 0, 0.25)",
       },
     },
   },

@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Logo from "../app/assets/logo.png";
 import Image from "next/image";
@@ -11,14 +13,16 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { CiHeart } from "react-icons/ci";
 import { FiMenu } from "react-icons/fi";
 import { RxCross2 } from "react-icons/rx";
+import { useTheme } from "./context/ThemeContext";
+import { BsMoon, BsSun } from "react-icons/bs";
 
 interface SidebarProps {
   activeRoute: string;
-  onLogout: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ activeRoute, onLogout }) => {
+const Sidebar: React.FC<SidebarProps> = ({ activeRoute }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,15 +37,29 @@ const Sidebar: React.FC<SidebarProps> = ({ activeRoute, onLogout }) => {
     setIsCollapsed(!isCollapsed);
   };
 
+  const navItems = [
+    { href: "/", label: "Dashboard", icon: FaRegCompass },
+    { href: "/my-projects", label: "My Projects", icon: FaRegFolderOpen },
+    { href: "/my-teams", label: "My Teams", icon: FaUsers },
+    { href: "/favorites", label: "Favorites", icon: CiHeart },
+  ];
+
+  const generalItems = [
+    { href: "/settings", label: "Settings", icon: IoSettingsOutline },
+    { href: "/help", label: "Help", icon: IoIosInformationCircleOutline },
+    { href: "/report", label: "Report", icon: LuFlagTriangleRight },
+    { href: "/payment", label: "Payment", icon: GoCreditCard },
+  ];
+
   return (
     <aside
       className={`${
         isCollapsed ? "w-20" : "w-64"
-      } bg-white text-black min-h-screen py-8 relative transition-all duration-300 sm:block hidden`}
+      } bg-sidebar-bg text-custom-text min-h-screen py-8 relative transition-all duration-300 sm:block hidden border-r border-border-color`}
     >
       <button
         onClick={toggleCollapse}
-        className="absolute top-4 right-4 sm:hidden"
+        className="absolute top-4 right-4 sm:hidden text-custom-text hover:text-primary"
       >
         {isCollapsed ? <FiMenu /> : <RxCross2 />}
       </button>
@@ -57,153 +75,105 @@ const Sidebar: React.FC<SidebarProps> = ({ activeRoute, onLogout }) => {
       </div>
       <nav>
         <ul className="px-4">
-          <li
-            className={`mb-4 flex items-center ${
-              isCollapsed ? "justify-center" : ""
-            } ${activeRoute === "/" ? "text-blue-500" : ""}`}
-          >
-            <FaRegCompass className="h-5 w-5 text-custom-text" />
-            {!isCollapsed && (
-              <Link
-                href="/"
-                className="hover:text-gray-400 text-custom-text font-bold ml-4"
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeRoute === item.href;
+            return (
+              <li
+                key={item.href}
+                className={`mb-4 flex items-center ${
+                  isCollapsed ? "justify-center" : ""
+                }`}
               >
-                Dashboard
-              </Link>
-            )}
-          </li>
-          <li
-            className={`mb-4 flex items-center ${
-              isCollapsed ? "justify-center" : ""
-            } ${activeRoute === "/my-projects" ? "text-blue-500" : ""}`}
-          >
-            <FaRegFolderOpen className="h-5 w-5 text-custom-text" />
-            {!isCollapsed && (
-              <Link
-                href="/my-projects"
-                className="hover:text-gray-400 text-custom-text font-bold ml-4"
-              >
-                My Projects
-              </Link>
-            )}
-          </li>
-          <li
-            className={`mb-4 flex items-center ${
-              isCollapsed ? "justify-center" : ""
-            } ${activeRoute === "/my-teams" ? "text-blue-500" : ""}`}
-          >
-            <FaUsers className="h-5 w-5 text-custom-text" />
-            {!isCollapsed && (
-              <Link
-                href="/my-teams"
-                className="hover:text-gray-400 text-custom-text font-bold ml-4"
-              >
-                My Teams
-              </Link>
-            )}
-          </li>
-          <li
-            className={`mb-4 flex items-center ${
-              isCollapsed ? "justify-center" : ""
-            } ${activeRoute === "/favorites" ? "text-blue-500" : ""}`}
-          >
-            <CiHeart className="h-5 w-5 text-custom-text" />
-            {!isCollapsed && (
-              <Link
-                href="/favorites"
-                className="hover:text-gray-400 text-custom-text font-bold ml-4"
-              >
-                Favorites
-              </Link>
-            )}
-          </li>
+                <Link
+                  href={item.href}
+                  className={`flex items-center w-full ${
+                    isActive
+                      ? "text-primary"
+                      : "text-custom-text hover:text-primary"
+                  } transition-colors`}
+                >
+                  <Icon className="h-5 w-5 flex-shrink-0" />
+                  {!isCollapsed && (
+                    <span className="font-bold ml-4">{item.label}</span>
+                  )}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
-        <div className="border-t border-gray-300 mb-4">
+        <div className="border-t border-border-color mb-4">
           {!isCollapsed && (
-            <h6 className="px-8 pt-4 font-bold text-md text-gray-400">
+            <h6 className="px-8 pt-4 font-bold text-md text-gray-400 dark:text-gray-500">
               General
             </h6>
           )}
         </div>
         <ul className="px-4">
+          {generalItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeRoute === item.href;
+            return (
+              <li
+                key={item.href}
+                className={`mb-4 flex items-center ${
+                  isCollapsed ? "justify-center" : ""
+                }`}
+              >
+                <Link
+                  href={item.href}
+                  className={`flex items-center w-full ${
+                    isActive
+                      ? "text-primary"
+                      : "text-custom-text hover:text-primary"
+                  } transition-colors`}
+                >
+                  <Icon className="h-5 w-5 flex-shrink-0" />
+                  {!isCollapsed && (
+                    <span className="font-bold ml-4">{item.label}</span>
+                  )}
+                </Link>
+              </li>
+            );
+          })}
           <li
             className={`mb-4 flex items-center ${
               isCollapsed ? "justify-center" : ""
-            } ${activeRoute === "/settings" ? "text-blue-500" : ""}`}
+            }`}
           >
-            <IoSettingsOutline className="h-5 w-5 text-custom-text" />
-            {!isCollapsed && (
-              <Link
-                href="/settings"
-                className="hover:text-gray-400 text-custom-text font-bold ml-4"
-              >
-                Settings
-              </Link>
-            )}
-          </li>
-          <li
-            className={`mb-4 flex items-center ${
-              isCollapsed ? "justify-center" : ""
-            } ${activeRoute === "/help" ? "text-blue-500" : ""}`}
-          >
-            <IoIosInformationCircleOutline className="h-5 w-5 text-custom-text" />
-            {!isCollapsed && (
-              <Link
-                href="/help"
-                className="hover:text-gray-400 text-custom-text font-bold ml-4"
-              >
-                Help
-              </Link>
-            )}
+            <button
+              onClick={toggleTheme}
+              className="flex items-center w-full text-custom-text hover:text-primary transition-colors"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? (
+                <BsSun className="h-5 w-5 flex-shrink-0" />
+              ) : (
+                <BsMoon className="h-5 w-5 flex-shrink-0" />
+              )}
+              {!isCollapsed && (
+                <span className="font-bold ml-4">
+                  {theme === "dark" ? "Light Mode" : "Dark Mode"}
+                </span>
+              )}
+            </button>
           </li>
           <li
             className={`mb-4 flex items-center ${
               isCollapsed ? "justify-center" : ""
             }`}
           >
-            <LuFlagTriangleRight className="h-5 w-5 text-custom-text" />
-            {!isCollapsed && (
-              <button
-                onClick={onLogout}
-                className="hover:text-gray-400 text-custom-text font-bold ml-4"
-              >
-                Report
-              </button>
-            )}
-          </li>
-          <li
-            className={`mb-4 flex items-center ${
-              isCollapsed ? "justify-center" : ""
-            }`}
-          >
-            <GoCreditCard className="h-5 w-5 text-custom-text" />
-            {!isCollapsed && (
-              <button
-                onClick={onLogout}
-                className="hover:text-gray-400 text-custom-text font-bold ml-4"
-              >
-                Payment
-              </button>
-            )}
-          </li>
-          <li
-            className={`mb-4 flex items-center ${
-              isCollapsed ? "justify-center" : ""
-            }`}
-          >
-            <AiOutlineLogout className="h-5 w-5 text-custom-text" />
-            {!isCollapsed && (
-              <button
-                onClick={onLogout}
-                className="hover:text-gray-400 text-custom-text font-bold ml-4"
-              >
-                Logout
-              </button>
-            )}
+            <Link
+              href="/login"
+              className="flex items-center w-full text-custom-text hover:text-red-500 transition-colors"
+            >
+              <AiOutlineLogout className="h-5 w-5 flex-shrink-0" />
+              {!isCollapsed && <span className="font-bold ml-4">Logout</span>}
+            </Link>
           </li>
         </ul>
         {!isCollapsed && (
-          <div className="fixed bottom-0 left-0 bg-[#F0F0F0] p-4 w-64">
+          <div className="fixed bottom-0 left-0 bg-card-bg border-t border-border-color p-4 w-64">
             <h5 className="inline-block text-custom-text text-sm border-b-[1px] border-dashed border-custom-text">
               Free Trial
             </h5>
