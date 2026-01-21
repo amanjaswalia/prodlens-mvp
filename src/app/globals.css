@@ -3,14 +3,31 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  --background: #f0f4f7;
   --foreground: #171717;
+  --custom-text: #4b4b4b;
+  --card-bg: #ffffff;
+  --sidebar-bg: #ffffff;
+  --border-color: #dbdbdb;
+  --input-bg: #ffffff;
+  --hover-bg: #f5f5f5;
+}
+
+.dark {
+  --background: #1a1a2e;
+  --foreground: #e4e4e7;
+  --custom-text: #d1d5db;
+  --card-bg: #16213e;
+  --sidebar-bg: #0f3460;
+  --border-color: #374151;
+  --input-bg: #1e293b;
+  --hover-bg: #1e3a5f;
 }
 
 @font-face {
-  font-family: 'Karla';
-  src: url('./fonts/Karla-Regular.woff2') format('woff2'),
-       url('./fonts//Karla-Regular.woff') format('woff');
+  font-family: "Karla";
+  src: url("./fonts/Karla-Regular.woff2") format("woff2"),
+    url("./fonts//Karla-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -19,12 +36,56 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: 'Karla', sans-serif;
+  font-family: "Karla", sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* Form validation styles */
+.input-error {
+  border-color: #ef4444 !important;
+  animation: shake 0.3s ease-in-out;
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+/* Custom scrollbar for dark mode */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
 }
