@@ -172,16 +172,6 @@ const Sidebar: React.FC<SidebarProps> = ({ activeRoute }) => {
             </Link>
           </li>
         </ul>
-        {!isCollapsed && (
-          <div className="fixed bottom-0 left-0 bg-card-bg border-t border-border-color p-4 w-64">
-            <h5 className="inline-block text-custom-text text-sm border-b-[1px] border-dashed border-custom-text">
-              Free Trial
-            </h5>
-            <p className="text-custom-text text-sm">
-              Expiring December 21st, 2024
-            </p>
-          </div>
-        )}
       </nav>
     </aside>
   );

@@ -169,20 +169,6 @@ export default function PaymentPage() {
         <p className="text-custom-text">Choose the plan that works best for you</p>
       </div>
 
-      {/* Current Plan Status */}
-      <div className="bg-card-bg rounded-lg shadow-lg border border-border-color p-6 mb-8">
-        <h2 className="text-lg font-bold text-[#051F61] dark:text-white mb-2">
-          Current Plan: Free Trial
-        </h2>
-        <p className="text-custom-text mb-4">
-          Your free trial expires on December 21st, 2024. Upgrade now to continue using all features.
-        </p>
-        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mb-2">
-          <div className="bg-yellow-500 h-2 rounded-full" style={{ width: "75%" }} />
-        </div>
-        <p className="text-sm text-custom-text">75% of trial period used</p>
-      </div>
-
       {/* Pricing Plans */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {plans.map((plan) => (
